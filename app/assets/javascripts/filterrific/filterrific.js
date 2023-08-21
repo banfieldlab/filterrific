@@ -154,19 +154,20 @@ Filterrific.observe_field = function(inputs_selector, frequency, callback) {
 Filterrific.init = function() {
   // Add change event handler to all Filterrific filter inputs.
   var filterrificForm = document.querySelector('#filterrific_filter');
-  filterrificForm.querySelectorAll('input, textarea, select, textarea').forEach(input => {
-    input.addEventListener('change', Filterrific.submitFilterForm)
-  })
-
-  // Add periodic observer to selected inputs.
-  // Use this for text fields you want to observe for change, e.g., a search input.
-  Filterrific.observe_field(
-    ".filterrific-periodically-observed",
-    0.5,
-    Filterrific.submitFilterForm
-  );
+  if (filterrificForm) {
+    filterrificForm.querySelectorAll('input, textarea, select, textarea').forEach(input => {
+      input.addEventListener('change', Filterrific.submitFilterForm)
+    })
+  
+    // Add periodic observer to selected inputs.
+    // Use this for text fields you want to observe for change, e.g., a search input.
+    Filterrific.observe_field(
+      ".filterrific-periodically-observed",
+      0.5,
+      Filterrific.submitFilterForm
+    );
+  }
 };
-
 
 // Initialize event observers on document ready and turbolinks page:load
 document.addEventListener('turbo:load', Filterrific.init);
