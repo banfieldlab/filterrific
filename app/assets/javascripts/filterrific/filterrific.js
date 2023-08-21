@@ -56,9 +56,10 @@ Filterrific.prepareRequest = function(form) {
 }
 
 Filterrific.processResponse = function(form, xhr) {
-  var rawResponse = (_ref = xhr.response) != null ? _ref : xhr.responseText,
+  var _ref = xhr.response,
+      rawResponse = (_ref != null) ? _ref : xhr.responseText,
       type = xhr.getResponseHeader('Content-Type'),
-      response;
+      response, script, parser;
 
   if (typeof rawResponse === 'string' && typeof type === 'string') {
       if (type.match(/\bjson\b/)) {
@@ -168,5 +169,4 @@ Filterrific.init = function() {
 
 
 // Initialize event observers on document ready and turbolinks page:load
-document.addEventListener('turbolinks:load', Filterrific.init);
-document.addEventListener('DOMContentLoaded', Filterrific.init)
+document.addEventListener('turbo:load', Filterrific.init);
